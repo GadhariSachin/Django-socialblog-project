@@ -1,2 +1,2 @@
-# Django-socialblog-projrct
+# Django-socialblog-project
 Django blog project
