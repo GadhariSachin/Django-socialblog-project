@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% for p in post %}
+    {{p.title}}
+    {{p.body}}
+    {{p.created}}
+  {% endfor %}
+{% endblock %}

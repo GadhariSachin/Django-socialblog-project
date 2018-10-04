@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-4">
+      <div class=" card" id='articleCard' style="padding-top:40px; padding-bottom:55px;">
+        <h1 id="styleHead" >Login</h1>
+        <hr>
+        <form method="POST" action="{% url 'accounts:login' %}">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{request.GET.next}}">
+          {% endif %}
+          <br>
+          <input type="submit" value="Login" class="btn btn-lg btn-primary pull-right">
+        </form>
+      </div>
+      <p id="articleHeading" >Don't have Account yet!! <a href="{% url 'accounts:signup' %}" id="styleHead" >Sign Up</a></p>
+    </div>
+    <div class="col-md-8">
+        <img src="https://cdn.datafloq.com/cache/blog_pictures/878x531/connecting-the-world-iot-ideas-for-business.jpg" alt="">
+    </div>
+  </div>
+{% endblock %}
