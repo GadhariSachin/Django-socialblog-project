@@ -1,0 +1,121 @@
+html{
+  margin: 20px;
+}
+
+.postList{
+  background-image: url('postlistPage2.jpg');
+  background-size: contain;
+  filter: blur(0.1px);
+  margin-left:auto;
+}
+
+.mynav{
+  padding: 5px;
+  color: black;
+}
+.choiceCard{
+  height: 140px;
+  width: 140px;
+  background-image: url('button2.jpg');
+  border-radius: 69px;
+  border: 5px solid orange;
+  color: white;
+  padding: 20px;
+}
+
+.signup{
+    background-image: url('signupPage.jpg');
+    padding-bottom:40px;
+    color:white;
+    opacity:0.8;
+}
+
+
+.choiceCard:hover{
+  background-image: url('button.jpg');
+  background-size: auto;
+  opacity: 0.7;
+}
+
+.listCard{
+    height:80px;
+    width: 180px;
+    background-image: url('button2.jpg');
+    border: 5px solid white;
+    color: white;
+    font-size:2em;
+    border-top-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+}
+
+.listCard:hover{
+  background-image: url('button.jpg');
+  background-size: auto;
+  opacity: 0.7;
+}
+
+
+.mycard{
+  height: 680px;
+  width: 100%;
+  color: white;
+  background-size: cover;
+  background-image: url('banner1.jpg');
+  opacity: 0.8;
+  padding: 30px;
+}
+
+.errorCard{
+  background-color:grey;
+  border-top-right-radius:45px;
+  border-bottom-left-radius:45px;
+  padding: 35px;
+  color: white;
+  font-size: 2em;
+}
+
+.coverButton{
+  border-radius: 30px;
+}
+
+.bigHeading{
+  font-size: 5em;
+  color: black;
+}
+
+.articleCard{
+  border-right: 5px solid grey;
+  border-bottom: 5px solid grey;
+}
+
+
+#articleHeading{
+  font-family: 'Lora', serif;
+  font-size:25px;
+}
+
+#navHead{
+  font-family: 'Lora', serif;
+  font-size: 20px;
+  color: grey;
+}
+
+#normalHead{
+  font-family: 'Lora', serif;
+  font-size: 25px;
+  color: white;
+}
+
+#styleHead{
+  font-family: 'Great Vibes', cursive;
+  font-size:40px;
+}
+
+.navbar-img{
+  width: 30px;
+  height: 35px;
+  float: left;
+  margin-top: -5px;
+  background-size: auto 100%;
+  margin-right: 5px;
+}

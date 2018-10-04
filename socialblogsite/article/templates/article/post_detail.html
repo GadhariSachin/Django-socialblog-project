@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-10">
+      <h2>{{post.title}}</h2>
+    </div>
+    <div class="col-md-2" style="float:right">
+      {% if post.author == request.user %}
+        <a href="{% url 'article:postedit' id=post.id %}">
+          <button type="button" class="btn btn-lg btn-primary"> <span class="glyphicon glyphicon-edit"></span></button>
+        </a>
+        <a href="{% url 'article:delete' id=post.id %}">
+          <button type="button" class="btn btn-lg btn-danger" ng-click='deletePost()'> <span class="glyphicon glyphicon-trash"></span></button>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+  <hr>
+<div class="row">
+  <div class="col-md-5">
+    <img src="{{post.image.url}}" style="border:5px solid grey; width:100%;">
+  </div>
+  <div class="col-md-6 col-md-offset-1">
+      <h3>{{post.body}}</h3>
+  </div>
+</div>
+<br>
+<br>
+  <div class="row">
+    <div class="text-right">
+      <strong> Post created by @{{post.author}}</strong> <br>
+      <p>{{post.created}}</p>
+    </div>
+    <div class="text-left">
+      <p class="text-muted"> {{likes_count}} <i> Like{{likes_count|pluralize}}</i> </p>
+      {% if request.user.is_authenticated %}
+      <form class="" action="{% url 'article:likepost' %}" method="post">
+        {% csrf_token %}
+        {% if is_liked  %}
+            <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-sm btn-danger"> <span class="glyphicon glyphicon-thumbs-down"></span> </button>
+        {% else %}
+            <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-sm btn-primary"> <span class="glyphicon glyphicon-thumbs-up"></span></button>
+        {% endif %}
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}

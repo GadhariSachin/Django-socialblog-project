@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row ">
+    <div class="col-md-9 postList" style="padding-bottom: 20px;">
+      <div>
+        {% for p in post  %}
+          <div class="card articleCard">
+            <a href="{% url 'article:postdetail' id=p.id slug=p.slug %}"> <h2>{{p.title}}</h2> </a>
+            <h3>{{p.snippet}}</h3>
+            <hr>
+            <div class="text-right" style="margin-right:15px; margin-bottom:10px;">
+              <strong>created by @{{p.author}}</strong> <br>
+              <small>{{p.created}}</small>
+            </div>
+          </div>
+          {% empty %}
+          <div class="card errorCard" >
+            <h2 id="articleHeading"> No match Found for search keyword "{{request.GET.q}}" </h2>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-3 text-center">
+      <form method="GET" action="{% url 'article:postlist' %}" type="submit" class="pull-right" style="padding-bottom:25px;">
+        <div class="input-group" style="width:100%;">
+          <input type="text" class="form-control" placeholder="Search by Article" name="q">
+          <span class="input-group-addon"> <span class="glyphicon glyphicon glyphicon-search"></span> </span>
+        </div>
+      </form>
+      <a href="{% url 'article:create' %}" id="navHead" class="pull-right"> <button type="button" class="btn btn-lg btn-success coverButton" style="width:100%;"> <span class="glyphicon glyphicon-plus"></span> Create New Article </button> </a>
+      <div class="text-center"  style="margin-top:100px;padding:25px; margin-bottom:80px;">
+        <h2> Category </h2>
+        <hr>
+        <form method="GET" action="{% url 'article:postlist' %}">
+            <input type="submit"  class="card listCard" name="q" value="Sports"><br>
+            <input type="submit"  class="card listCard" name="q" value="Vehicle"><br>
+            <input type="submit"  class="card listCard" name="q" value="Technology"><br>
+            <input type="submit"  class="card listCard" name="q" value="Movie"><br>
+            <input type="submit"  class="card listCard" name="q" value="Politics">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+<div class="row signup">
+  <div class="card col-md-offset-3 col-md-7" >
+      <h1 class="text-center" id='styleHead' >Sign Up</h1>
+      <hr>
+      <form method="POST" action="{% url 'accounts:signup' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <br>
+          <input type="submit" value="Sign Up" class="btn btn-lg btn-light coverButton" style="float:right; color:black;">
+      </form>
+  </div>
+</div>
+{% endblock %}
