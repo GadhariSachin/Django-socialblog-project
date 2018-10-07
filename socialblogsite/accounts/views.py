@@ -2,9 +2,11 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
+
 
 def UserLoginView(request):
     if request.method == 'POST':
@@ -13,15 +15,14 @@ def UserLoginView(request):
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(username=username, password=password)
-            if user:
-                if user.is_active:
-                    login(request,user)
-                    if 'next' in request.POST:
-                         return redirect(request.POST.get('next'))
-                    else:
-                         return redirect('article:postlist')
+            if user is not None:
+                login(request,user)
+                if 'next' in request.POST:
+                     return redirect(request.POST.get('next'))
                 else:
-                    return HttpResponse("<h1> User is not active more!!")
+                     return redirect('article:postlist')
+            else:
+                return HttpResponseRedirect(reverse('accounts:login'))
     else:
         form = UserLoginForm()
         context = {'form': form}
@@ -31,19 +32,10 @@ def UserLogoutView(request):
     logout(request)
     return redirect('article:postlist')
 
-def UserSignupView(request):
-    if request.method == 'POST':
-        form = UserCreateForm(request.POST or None)
-        if form.is_valid():
-            new_user = form.save(commit = False)
-            new_user.set_password(form.cleaned_data['password'])
-            new_user.save()
-            Profile.objects.create(user = new_user)
-            return redirect('accounts:login')
-    else:
-        form = UserCreateForm()
-        context = {'form': form}
-        return render(request, 'accounts/signup.html', context)
+class SignUp(CreateView):
+    form_class = UserCreateForm
+    success_url = reverse_lazy("accounts:login")
+    template_name = "accounts/signup.html"
 
 
 @login_required
